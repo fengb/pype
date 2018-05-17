@@ -13,8 +13,11 @@ class l(object):
     def __init__(self, func, *args, **kwargs):
         self.func = partial(func, *args, **kwargs)
 
+    def __call__(self, arg):
+        return self.func(arg)
+
     def __ror__(self, lhs):
-        return self.func(lhs)
+        return self(lhs)
 
 class r(object):
     def __init__(self, func, *args, **kwargs):
@@ -22,8 +25,11 @@ class r(object):
         self.args = args
         self.kwargs = kwargs
 
+    def __call__(self, arg):
+        return self.func(arg, *args, **kwargs)
+
     def __ror__(self, lhs):
-        return self.func(lhs, *args, **kwargs)
+        return self(lhs)
 
 if __name__ == "__main__":
     import doctest
