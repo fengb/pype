@@ -1,3 +1,12 @@
+"""
+>>> import pype
+>>> ([1, 2, 3, 4, 5]
+...   | pype.l(filter, lambda x: x%2 == 1)
+...   | pype.l(map, lambda x: x**2)
+... )
+[1, 9, 25]
+"""
+
 from functools import partial
 
 class l(object):
@@ -15,3 +24,7 @@ class r(object):
 
     def __ror__(self, lhs):
         return self.func(lhs, *args, **kwargs)
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
